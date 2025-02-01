@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
+import { loginUser, registerUser } from "../api/auth";
 
 const AuthContainer = styled.div`
   max-width: 400px;
@@ -97,11 +98,7 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
     setIsLoading(true);
     setError(null);
 
-    const endpoint = isLogin
-      ? "https://ncnews.novafps.com/api/auth/login"
-      : "https://ncnews.novafps.com/api/auth/signup";
-
-    const requestBody = isLogin
+    const authData = isLogin
       ? {
           email: formData.email,
           password: formData.password,
@@ -114,29 +111,9 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
         };
 
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      const responseText = await response.text();
-
-      let data;
-      try {
-        data = JSON.parse(responseText);
-      } catch {
-        throw new Error(`Invalid JSON response: ${responseText}`);
-      }
-
-      if (!response.ok) {
-        throw new Error(
-          data.message || `HTTP error! status: ${response.status}`
-        );
-      }
+      const data = await (isLogin
+        ? loginUser(authData)
+        : registerUser(authData));
 
       dispatch(
         login({
