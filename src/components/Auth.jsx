@@ -1,5 +1,82 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const AuthContainer = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--background-color, #1a1a1a);
+  color: white;
+  border: 1px solid var(--border-color, #333);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  background: #2d2d2d;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+
+  &:focus {
+    outline: 2px solid #646cff;
+    outline-offset: 2px;
+  }
+`;
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  background: #3a3a3a;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #4a4a4a;
+    border-color: #646cff;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    color: #646cff;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: #ef4444;
+  background-color: #fee2e2;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+`;
 
 function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
   const [isLogin, setIsLogin] = useState(initialIsLogin);
@@ -76,17 +153,17 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
   };
 
   return (
-    <div className="auth-container">
-      <button className="close-btn" onClick={onClose} aria-label="Close">
+    <AuthContainer>
+      <CloseButton onClick={onClose} aria-label="Close">
         ×
-      </button>
+      </CloseButton>
       <h2>{isLogin ? "Login" : "Sign Up"}</h2>
-      {error && <p className="error">{error}</p>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
-      <form onSubmit={handleSubmit} aria-label="Authentication form">
+      <Form onSubmit={handleSubmit} aria-label="Authentication form">
         {!isLogin && (
           <>
-            <input
+            <Input
               type="text"
               name="username"
               id="username"
@@ -96,7 +173,7 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
               onChange={handleChange}
               required
             />
-            <input
+            <Input
               type="text"
               name="name"
               id="name"
@@ -108,7 +185,7 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
             />
           </>
         )}
-        <input
+        <Input
           type="email"
           name="email"
           id="email"
@@ -118,7 +195,7 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
           onChange={handleChange}
           required
         />
-        <input
+        <Input
           type="password"
           name="password"
           id="password"
@@ -128,21 +205,17 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
           onChange={handleChange}
           required
         />
-        <button type="submit" disabled={isLoading} aria-busy={isLoading}>
+        <Button type="submit" disabled={isLoading} aria-busy={isLoading}>
           {isLoading ? "Loading..." : isLogin ? "Login" : "Sign Up"}
-        </button>
-      </form>
+        </Button>
+      </Form>
 
-      <button
-        onClick={() => setIsLogin(!isLogin)}
-        disabled={isLoading}
-        aria-busy={isLoading}
-      >
+      <Button onClick={() => setIsLogin(!isLogin)} disabled={isLoading}>
         {isLogin
           ? "Need an account? Sign Up"
           : "Already have an account? Login"}
-      </button>
-    </div>
+      </Button>
+    </AuthContainer>
   );
 }
 

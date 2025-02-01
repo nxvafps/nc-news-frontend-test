@@ -3,6 +3,34 @@ import Article from "./Article";
 import ArticleFilters from "./ArticleFilters";
 import Pagination from "./Pagination";
 import { fetchArticles, searchArticles } from "../api/articles";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+`;
+
+const LoadingMessage = styled.div`
+  text-align: center;
+  padding: 2rem;
+`;
+
+const ErrorMessage = styled.div`
+  color: #ef4444;
+  background-color: #fee2e2;
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+`;
 
 function ArticlesList() {
   const [articles, setArticles] = useState([]);
@@ -66,22 +94,22 @@ function ArticlesList() {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div className="error">{error}</div>;
+  if (isLoading) return <LoadingMessage>Loading...</LoadingMessage>;
+  if (error) return <ErrorMessage>{error}</ErrorMessage>;
 
   return (
-    <div className="articles-container">
+    <Container>
       <ArticleFilters
         filters={filters}
         onFilterChange={handleFilterChange}
         onSearch={handleSearch}
       />
 
-      <div className="articles-grid">
+      <Grid>
         {articles.map((article) => (
           <Article key={article.article_id} article={article} />
         ))}
-      </div>
+      </Grid>
 
       {!isSearching && (
         <Pagination
@@ -90,7 +118,7 @@ function ArticlesList() {
           onPageChange={setCurrentPage}
         />
       )}
-    </div>
+    </Container>
   );
 }
 

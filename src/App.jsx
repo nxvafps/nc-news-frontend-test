@@ -1,11 +1,45 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
 import "./App.css";
 import Auth from "./components/Auth";
 import LogoutButton from "./components/LogoutButton";
 import AuthButtons from "./components/AuthButtons";
 import ArticlesList from "./components/ArticleList";
 import ArticlePage from "./components/ArticlePage";
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  margin: 2rem 0;
+  color: inherit;
+`;
+
+const Content = styled.div`
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const AuthWrapper = styled.div`
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+`;
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -21,16 +55,16 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <h1>Welcome to NC News!</h1>
-        <div className="content">
+      <AppContainer>
+        <Title>Welcome to NC News!</Title>
+        <Content>
           <Routes>
             <Route path="/" element={<ArticlesList />} />
             <Route path="/articles/:articleId" element={<ArticlePage />} />
           </Routes>
-        </div>
+        </Content>
 
-        <div className="auth-wrapper">
+        <AuthWrapper>
           {isAuthenticated ? (
             <LogoutButton onLogout={() => setIsAuthenticated(false)} />
           ) : showAuthForm ? (
@@ -51,8 +85,8 @@ function App() {
               }}
             />
           )}
-        </div>
-      </div>
+        </AuthWrapper>
+      </AppContainer>
     </Router>
   );
 }
