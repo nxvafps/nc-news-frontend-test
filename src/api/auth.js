@@ -1,4 +1,12 @@
-const AUTH_BASE_URL = "https://ncnews.novafps.com/api/auth";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "https://ncnews.novafps.com/api/auth",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+});
 
 export const loginUser = async (credentials) => {
   return makeAuthRequest("/login", credentials);
@@ -9,26 +17,13 @@ export const registerUser = async (userData) => {
 };
 
 const makeAuthRequest = async (endpoint, data) => {
-  const response = await fetch(`${AUTH_BASE_URL}${endpoint}`, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  const responseText = await response.text();
-
   try {
-    const parsedData = JSON.parse(responseText);
-    if (!response.ok) {
-      throw new Error(
-        parsedData.message || `HTTP error! status: ${response.status}`
-      );
-    }
-    return parsedData;
-  } catch {
-    throw new Error(`Invalid JSON response: ${responseText}`);
+    const response = await api.post(endpoint, data);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
   }
 };

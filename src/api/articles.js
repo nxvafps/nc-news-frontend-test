@@ -1,38 +1,39 @@
-export const fetchArticles = async (currentPage, filters) => {
-  const queryParams = new URLSearchParams({
-    p: currentPage,
-    ...filters,
-  }).toString();
+import axios from "axios";
 
-  const response = await fetch(
-    `https://ncnews.novafps.com/api/articles?${queryParams}`
-  );
-  const data = await response.json();
+const api = axios.create({
+  baseURL: "https://ncnews.novafps.com/api/articles",
+  timeout: 5000,
+});
+
+export const fetchArticles = async (currentPage, filters) => {
+  const { data } = await api.get("/", {
+    params: {
+      p: currentPage,
+      ...filters,
+    },
+  });
   return data;
 };
 
 export const searchArticles = async (searchTerm) => {
-  const response = await fetch(
-    `https://ncnews.novafps.com/api/articles/search?q=${encodeURIComponent(
-      searchTerm
-    )}`
-  );
-  const data = await response.json();
+  const { data } = await api.get("/search", {
+    params: {
+      q: searchTerm,
+    },
+  });
   return data;
 };
 
 export const fetchArticleById = async (articleId) => {
-  const response = await fetch(
-    `https://ncnews.novafps.com/api/articles/${articleId}`
-  );
-  const data = await response.json();
+  const { data } = await api.get(`/${articleId}`);
   return data.article;
 };
 
 export const fetchArticleComments = async (articleId, page) => {
-  const response = await fetch(
-    `https://ncnews.novafps.com/api/articles/${articleId}/comments?p=${page}`
-  );
-  const data = await response.json();
+  const { data } = await api.get(`/${articleId}/comments`, {
+    params: {
+      p: page,
+    },
+  });
   return data;
 };
