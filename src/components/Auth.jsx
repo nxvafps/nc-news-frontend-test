@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice";
 
 const AuthContainer = styled.div`
   max-width: 400px;
@@ -79,6 +81,7 @@ const ErrorMessage = styled.p`
 `;
 
 function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
+  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(initialIsLogin);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -135,8 +138,13 @@ function Auth({ onAuthSuccess, isLogin: initialIsLogin, onClose }) {
         );
       }
 
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      dispatch(
+        login({
+          token: data.token,
+          user: data.user,
+        })
+      );
+
       if (onAuthSuccess) onAuthSuccess();
     } catch (err) {
       setError(err.message || "Failed to connect to the server");

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import "./App.css";
@@ -7,6 +8,7 @@ import LogoutButton from "./components/LogoutButton";
 import AuthButtons from "./components/AuthButtons";
 import ArticlesList from "./components/ArticleList";
 import ArticlePage from "./components/ArticlePage";
+import { logout } from "./store/authSlice";
 
 const AppContainer = styled.div`
   display: flex;
@@ -42,17 +44,18 @@ const AuthWrapper = styled.div`
 `;
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("authToken")
-  );
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
 
   const handleAuthSuccess = () => {
-    setIsAuthenticated(true);
     setShowAuthForm(false);
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <Router>
       <AppContainer>
@@ -66,7 +69,7 @@ function App() {
 
         <AuthWrapper>
           {isAuthenticated ? (
-            <LogoutButton onLogout={() => setIsAuthenticated(false)} />
+            <LogoutButton onLogout={handleLogout} />
           ) : showAuthForm ? (
             <Auth
               onAuthSuccess={handleAuthSuccess}
