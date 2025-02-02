@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import "./App.css";
 import { Auth } from "./components";
 
 import {
@@ -19,23 +18,37 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden; // Prevent horizontal scrolling on mobile
+  padding: 0 1rem; // Add padding for smaller screens
+  box-sizing: border-box;
 `;
 
 const Title = styled.h1`
   width: 100%;
   text-align: center;
-  margin: 2rem 0;
+  margin: 1.5rem 0; // Reduced margin on mobile
   padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem; // Smaller font size on mobile
+    margin: 1rem 0;
+  }
 `;
 
 const Content = styled.div`
   width: 100%;
-  max-width: 1250px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem; // Reduced padding on mobile
   flex: 1;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 `;
 
 const AuthWrapper = styled.div`
@@ -43,6 +56,22 @@ const AuthWrapper = styled.div`
   top: 1rem;
   right: 1rem;
   z-index: 100;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: auto;
+    bottom: 1rem; // Move to bottom on mobile
+    right: 1rem;
+    left: 1rem; // Stretch across bottom
+    display: flex;
+    justify-content: center;
+
+    /* Add background for better visibility */
+    background: rgba(26, 26, 26, 0.8);
+    padding: 0.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+  }
 `;
 
 function App() {

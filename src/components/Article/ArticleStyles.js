@@ -20,12 +20,21 @@ export const ArticleCard = styled.article`
   &:hover {
     transform: translateY(-4px);
   }
+
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 350px;
+  }
 `;
 
 export const ArticleImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
 `;
 
 export const ArticleContent = styled.div`
@@ -34,6 +43,10 @@ export const ArticleContent = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
 `;
 
 export const ArticleTitle = styled.h2`
@@ -44,6 +57,12 @@ export const ArticleTitle = styled.h2`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+  }
 `;
 
 export const ArticleMeta = styled.div`

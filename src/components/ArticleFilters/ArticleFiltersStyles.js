@@ -6,13 +6,19 @@ export const FiltersContainer = styled.div`
   align-items: center;
   gap: 1.5rem;
   margin: 0 auto 2.5rem auto;
-  padding: 2rem;
-  width: 95%;
+  padding: 1rem;
+  width: 100%;
   max-width: 1200px;
   background: rgba(26, 26, 26, 0.6);
   backdrop-filter: blur(8px);
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 export const SearchForm = styled.form`
@@ -21,6 +27,11 @@ export const SearchForm = styled.form`
   width: 100%;
   max-width: 500px;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -43,8 +54,9 @@ export const SearchInput = styled.input`
     box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
   }
 
-  &:hover {
-    border-color: #444;
+  @media (max-width: 768px) {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 0.5rem 0.75rem;
   }
 `;
 
@@ -55,6 +67,12 @@ export const FilterControls = styled.div`
   gap: 1.25rem;
   width: 100%;
   padding: 0.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+  }
 `;
 
 export const FilterInput = styled.input`
@@ -65,6 +83,8 @@ export const FilterInput = styled.input`
   color: white;
   font-size: 0.95rem;
   transition: all 0.2s ease-in-out;
+  max-width: 300px;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -72,8 +92,15 @@ export const FilterInput = styled.input`
     box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
   }
 
-  &:hover {
-    border-color: #444;
+  @media (max-width: 768px) {
+    max-width: 250px;
+    font-size: 16px;
+    padding: 0.5rem 0.75rem;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 200px;
   }
 `;
 
@@ -83,6 +110,12 @@ export const FilterSelect = styled.select`
   border-radius: 4px;
   background: #1a1a1a;
   color: white;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 16px;
+    padding: 0.5rem 0.75rem;
+  }
 `;
 
 export const Button = styled.button`
@@ -97,5 +130,11 @@ export const Button = styled.button`
   &:hover {
     background: #4a4a4a;
     border-color: #646cff;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 16px;
   }
 `;
