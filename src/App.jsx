@@ -3,11 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import "./App.css";
-import Auth from "./components/Auth";
-import LogoutButton from "./components/LogoutButton";
-import AuthButtons from "./components/AuthButtons";
-import ArticlesList from "./components/ArticleList";
-import ArticlePage from "./components/ArticlePage";
+import { Auth } from "./components";
+
+import {
+  ArticlesList,
+  ArticlePage,
+  AuthButtons,
+  LogoutButton,
+} from "./components";
 import { logout } from "./store/authSlice";
 
 const AppContainer = styled.div`

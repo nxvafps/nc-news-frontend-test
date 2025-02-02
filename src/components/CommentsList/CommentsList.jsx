@@ -1,23 +1,11 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import Comment from "./Comment";
-import Pagination from "./Pagination";
+import { Comment, Pagination } from "..";
 
-const CommentsSection = styled.section`
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-`;
-
-const CommentsTitle = styled.h2`
-  margin-bottom: 1.5rem;
-`;
-
-const CommentsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
+import {
+  CommentsSection,
+  CommentsTitle,
+  CommentsContainer,
+} from "./CommentsListStyles";
 
 function CommentsList({ comments, currentPage, totalPages, onPageChange }) {
   return (

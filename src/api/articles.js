@@ -37,3 +37,12 @@ export const fetchArticleComments = async (articleId, page) => {
   });
   return data;
 };
+
+export const updateArticleVotes = async (articleId, voteChange, token) => {
+  const { data } = await api.patch(
+    `/${articleId}`,
+    { inc_votes: voteChange },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return data;
+};
