@@ -39,9 +39,12 @@ const ArticleFilters = ({ filters, onFilterChange, onSearch }) => {
       <SearchForm onSubmit={handleSearch}>
         <SearchInput
           type="search"
+          id="article-search"
+          name="article-search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search articles..."
+          aria-label="Search articles"
         />
         <Button type="submit">Search</Button>
       </SearchForm>
