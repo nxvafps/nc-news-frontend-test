@@ -14,29 +14,28 @@ import {
 import { logout } from "./store/authSlice";
 
 const AppContainer = styled.div`
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  text-align: center;
 `;
 
 const Title = styled.h1`
+  width: 100%;
+  text-align: center;
   margin: 2rem 0;
-  color: inherit;
+  padding: 0 1rem;
 `;
 
 const Content = styled.div`
-  max-width: 1200px;
   width: 100%;
+  max-width: 1250px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const AuthWrapper = styled.div`

@@ -4,30 +4,47 @@ export const FiltersContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  width: 100%;
+  gap: 1.5rem;
+  margin: 0 auto 2.5rem auto;
+  padding: 2rem;
+  width: 95%;
+  max-width: 1200px;
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 export const SearchForm = styled.form`
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
-  max-width: 400px;
-  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-bottom: 2rem;
 `;
 
 export const SearchInput = styled.input`
   flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #333;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #333;
+  border-radius: 8px;
   background: #1a1a1a;
   color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
 
   &::placeholder {
-    color: #666;
+    color: #888;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
+  }
+
+  &:hover {
+    border-color: #444;
   }
 `;
 
@@ -35,16 +52,29 @@ export const FilterControls = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.25rem;
   width: 100%;
+  padding: 0.5rem;
 `;
 
 export const FilterInput = styled.input`
-  padding: 0.5rem;
-  border: 1px solid #333;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #333;
+  border-radius: 8px;
   background: #1a1a1a;
   color: white;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
+  }
+
+  &:hover {
+    border-color: #444;
+  }
 `;
 
 export const FilterSelect = styled.select`
