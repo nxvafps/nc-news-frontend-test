@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ArticleTitle = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: #1f2937;
+  color: #fff;
 `;
 
 export const ArticleImage = styled.img`
