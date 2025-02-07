@@ -22,14 +22,27 @@ function Comment({ comment }) {
     auth
   );
 
+  const formattedDate = new Date(comment.created_at).toLocaleDateString(
+    undefined,
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
+
   return (
-    <CommentContainer>
+    <CommentContainer role="article">
       <CommentAvatar author={comment.author} avatarUrl={avatar} />
       <CommentContent>
         <CommentHeader>
           <CommentAuthor>{comment.author}</CommentAuthor>
-          <CommentTime dateTime={comment.created_at}>
-            {new Date(comment.created_at).toLocaleDateString()}
+          <CommentTime
+            dateTime={comment.created_at}
+            aria-label={`Posted on ${formattedDate}`}
+            title={`Posted on ${formattedDate}`}
+          >
+            {formattedDate}
           </CommentTime>
         </CommentHeader>
         <CommentBody>{comment.body}</CommentBody>

@@ -21,37 +21,83 @@ function ArticlePage() {
     isLoading: articleLoading,
     error: articleError,
   } = useArticle(articleId);
+
   const { votes, userVote, isVoting, handleVote } = useArticleVoting(
     article?.votes || 0,
     articleId,
     auth
   );
-  const { comments, currentPage, totalPages, setCurrentPage } =
-    useComments(articleId);
 
-  if (articleLoading) return <LoadingMessage>Loading...</LoadingMessage>;
-  if (articleError) return <ErrorMessage>{articleError}</ErrorMessage>;
-  if (!article) return <ErrorMessage>Article not found</ErrorMessage>;
+  const {
+    comments,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+    isLoading: commentsLoading,
+    error: commentsError,
+  } = useComments(articleId);
+
+  if (articleLoading) {
+    return (
+      <LoadingMessage role="status" aria-live="polite">
+        <span aria-hidden="true">⌛</span> Loading article...
+      </LoadingMessage>
+    );
+  }
+
+  if (articleError) {
+    return (
+      <ErrorMessage role="alert">
+        <span aria-hidden="true">⚠️</span> {articleError}
+      </ErrorMessage>
+    );
+  }
+
+  if (!article) {
+    return (
+      <ErrorMessage role="alert">
+        <span aria-hidden="true">🔍</span> Article not found
+      </ErrorMessage>
+    );
+  }
 
   return (
     <ArticlePageContainer>
-      <BackButton onClick={() => navigate("/")}>← Back to Articles</BackButton>
+      <nav aria-label="Article navigation">
+        <BackButton
+          onClick={() => navigate("/")}
+          aria-label="Go back to articles list"
+        >
+          <span aria-hidden="true">←</span> Back to Articles
+        </BackButton>
+      </nav>
 
-      <ArticleContent
-        article={article}
-        authorAvatar={authorAvatar}
-        votes={votes}
-        userVote={userVote}
-        onVote={handleVote}
-        isVoting={isVoting}
-      />
+      <main>
+        <ArticleContent
+          article={article}
+          authorAvatar={authorAvatar}
+          votes={votes}
+          userVote={userVote}
+          onVote={handleVote}
+          isVoting={isVoting}
+        />
 
-      <CommentsList
-        comments={comments}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+        <section aria-label="Article comments">
+          {commentsError ? (
+            <ErrorMessage role="alert">
+              <span aria-hidden="true">⚠️</span> {commentsError}
+            </ErrorMessage>
+          ) : (
+            <CommentsList
+              comments={comments}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              isLoading={commentsLoading}
+            />
+          )}
+        </section>
+      </main>
     </ArticlePageContainer>
   );
 }

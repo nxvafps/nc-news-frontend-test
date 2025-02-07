@@ -16,6 +16,19 @@ export const AuthContainer = styled.div`
     padding: 1.75rem;
     margin: 1.5rem auto;
   }
+
+  h2 {
+    font-size: 1.75rem;
+    margin: 1rem 0 3rem;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      margin: 0.75rem 0 2.5rem;
+    }
+  }
 `;
 
 export const Form = styled.form`

@@ -22,20 +22,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  :root {
-    --background-primary: #0a0a0c;
-    --background-secondary: #13131a;
-    --background-tertiary: #1c1c26;
-    --text-primary: #f8f8ff;
-    --text-secondary: #a0a0b8;
-    --accent-primary: #6366f1;
-    --accent-hover: #818cf8;
-    --accent-muted: rgba(99, 102, 241, 0.1);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --error-color: #ef4444;
-    --success-color: #10b981;
-  }
   scroll-behavior: smooth;
 }
 
