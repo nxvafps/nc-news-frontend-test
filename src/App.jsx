@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { Auth } from "./components";
+import "./App.css";
 
 import {
   ArticlesList,

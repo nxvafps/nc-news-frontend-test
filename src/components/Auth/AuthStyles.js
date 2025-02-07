@@ -1,103 +1,104 @@
 import styled from "styled-components";
 
 export const AuthContainer = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: var(--background-color, #1a1a1a);
-  color: white;
-  border: 1px solid var(--border-color, #333);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  position: relative;
+  max-width: 450px;
+  margin: 2.5rem auto;
+  padding: 2.5rem;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  backdrop-filter: blur(12px);
 
   @media (max-width: 768px) {
     max-width: 90%;
-    padding: 1.5rem;
-    margin: 1rem auto;
+    padding: 1.75rem;
+    margin: 1.5rem auto;
   }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-
-  @media (max-width: 768px) {
-    gap: 0.75rem;
-  }
+  gap: 1.5rem;
 `;
 
 export const Input = styled.input`
-  padding: 0.5rem;
-  background: #2d2d2d;
-  color: white;
-  border: 1px solid #444;
-  border-radius: 4px;
+  padding: 1.125rem;
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
   width: 100%;
-  box-sizing: border-box;
-  font-size: 16px; /* Prevents iOS zoom on focus */
+  font-size: 1rem;
+  transition: all 0.2s ease;
 
-  &:focus {
-    outline: 2px solid #646cff;
-    outline-offset: 2px;
+  &::placeholder {
+    color: var(--text-secondary);
   }
 
-  @media (max-width: 768px) {
-    padding: 0.75rem;
-    margin-bottom: 0.25rem;
-    /* Improve touch target size */
-    min-height: 44px;
-    -webkit-tap-highlight-color: transparent;
+  &:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+    outline: none;
   }
 `;
 
 export const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background: #3a3a3a;
-  color: white;
-  border: 1px solid #555;
-  border-radius: 8px;
+  padding: 1.125rem;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 14px;
   cursor: pointer;
-  transition: background 0.2s;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
   width: 100%;
+  margin-top: 0.5rem;
 
   &:hover:not(:disabled) {
-    background: #4a4a4a;
-    border-color: #646cff;
+    background: var(--accent-hover);
+    transform: translateY(-2px);
   }
 
-  @media (max-width: 768px) {
-    padding: 0.75rem;
-    font-size: 16px;
-    /* Improve touch target size */
-    min-height: 44px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  background: transparent;
+  top: 1.25rem;
+  right: 1.25rem;
+  padding: 0.625rem;
+  background: var(--background-tertiary);
   border: none;
-  color: white;
+  color: var(--text-secondary);
   cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    color: #646cff;
+    color: var(--accent-primary);
+    background: var(--background-tertiary);
+    transform: scale(1.05);
   }
 `;
 
 export const ErrorMessage = styled.p`
-  color: #ef4444;
-  background-color: #fee2e2;
-  padding: 0.5rem;
-  border-radius: 4px;
-  margin: 0.5rem 0;
+  color: var(--error-color);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 0;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;

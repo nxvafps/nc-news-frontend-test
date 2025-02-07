@@ -4,55 +4,65 @@ export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin-top: 2rem;
-  padding: 0 1rem;
-  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px var(--shadow-color);
 
   @media (max-width: 768px) {
-    gap: 0.5rem;
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
   }
 `;
 
 export const PageButton = styled.button`
-  padding: 0.5rem 1rem;
-  background: #3a3a3a;
-  color: white;
-  border: 1px solid #555;
-  border-radius: 8px;
+  padding: 0.875rem 1.5rem;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.2s;
-  min-width: 100px;
-
-  @media (max-width: 768px) {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-    min-width: 80px;
-    /* Increase touch target size */
-    min-height: 44px;
-  }
+  transition: all 0.2s ease;
+  min-width: 120px;
+  font-weight: 500;
+  font-size: 1rem;
 
   &:hover:not(:disabled) {
-    background: #4a4a4a;
-    border-color: #646cff;
+    background: var(--accent-hover);
+    transform: translateY(-2px);
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-width: 200px;
+    padding: 1rem;
   }
 `;
 
 export const PageInfo = styled.span`
-  color: #888;
-  font-size: 0.9rem;
-  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background: var(--background-tertiary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 
   @media (max-width: 768px) {
     width: 100%;
+    text-align: center;
     order: -1;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
+    padding: 0.75rem;
   }
 `;

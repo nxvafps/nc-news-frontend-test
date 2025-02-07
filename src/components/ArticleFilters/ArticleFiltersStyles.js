@@ -6,18 +6,20 @@ export const FiltersContainer = styled.div`
   align-items: center;
   gap: 1.5rem;
   margin: 0 auto 2.5rem auto;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
   max-width: 1200px;
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+  background: var(--background-secondary);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--shadow-color);
 
   @media (max-width: 768px) {
-    gap: 1rem;
+    gap: 1.25rem;
     margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 20px;
   }
 `;
 
@@ -25,38 +27,31 @@ export const SearchForm = styled.form`
   display: flex;
   gap: 1rem;
   width: 100%;
-  max-width: 500px;
-  margin-bottom: 2rem;
+  max-width: 600px;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    margin-bottom: 1rem;
   }
 `;
 
 export const SearchInput = styled.input`
   flex: 1;
-  padding: 0.75rem 1rem;
-  border: 2px solid #333;
-  border-radius: 8px;
-  background: #1a1a1a;
-  color: white;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--background-tertiary);
+  color: var(--text-primary);
   font-size: 1rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease;
 
   &::placeholder {
-    color: #888;
+    color: var(--text-secondary);
   }
 
   &:focus {
     outline: none;
-    border-color: #4a9eff;
-    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 16px; /* Prevents iOS zoom on focus */
-    padding: 0.5rem 0.75rem;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-muted);
   }
 `;
 
@@ -64,77 +59,62 @@ export const FilterControls = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 1rem;
   width: 100%;
-  padding: 0.5rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 0;
-  }
 `;
 
-export const FilterInput = styled.input`
-  padding: 0.75rem 1rem;
-  border: 2px solid #333;
-  border-radius: 8px;
-  background: #1a1a1a;
-  color: white;
-  font-size: 0.95rem;
-  transition: all 0.2s ease-in-out;
+export const FilterInput = styled(SearchInput)`
   max-width: 300px;
   width: 100%;
-
-  &:focus {
-    outline: none;
-    border-color: #4a9eff;
-    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    max-width: 250px;
-    font-size: 16px;
-    padding: 0.5rem 0.75rem;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 200px;
-  }
 `;
 
 export const FilterSelect = styled.select`
-  padding: 0.5rem;
-  border: 1px solid #333;
-  border-radius: 4px;
-  background: #1a1a1a;
-  color: white;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a0a0b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 3rem;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 16px;
-    padding: 0.5rem 0.75rem;
+  &:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+  }
+
+  option {
+    background: var(--background-secondary);
   }
 `;
 
 export const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background: #3a3a3a;
-  color: white;
-  border: 1px solid #555;
-  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 14px;
   cursor: pointer;
-  transition: background 0.2s;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 120px;
 
-  &:hover {
-    background: #4a4a4a;
-    border-color: #646cff;
+  &:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
   @media (max-width: 768px) {
     width: 100%;
-    padding: 0.75rem;
-    font-size: 16px;
   }
 `;

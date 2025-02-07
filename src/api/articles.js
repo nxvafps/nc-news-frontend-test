@@ -6,43 +6,78 @@ const api = axios.create({
 });
 
 export const fetchArticles = async (currentPage, filters) => {
-  const { data } = await api.get("/", {
-    params: {
-      p: currentPage,
-      ...filters,
-    },
-  });
-  return data;
+  try {
+    const { data } = await api.get("/", {
+      params: {
+        p: currentPage,
+        ...filters,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
+  }
 };
 
 export const searchArticles = async (searchTerm) => {
-  const { data } = await api.get("/search", {
-    params: {
-      q: searchTerm,
-    },
-  });
-  return data;
+  try {
+    const { data } = await api.get("/search", {
+      params: {
+        q: searchTerm,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
+  }
 };
 
 export const fetchArticleById = async (articleId) => {
-  const { data } = await api.get(`/${articleId}`);
-  return data.article;
+  try {
+    const { data } = await api.get(`/${articleId}`);
+    return data.article;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
+  }
 };
 
 export const fetchArticleComments = async (articleId, page) => {
-  const { data } = await api.get(`/${articleId}/comments`, {
-    params: {
-      p: page,
-    },
-  });
-  return data;
+  try {
+    const { data } = await api.get(`/${articleId}/comments`, {
+      params: {
+        p: page,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
+  }
 };
 
 export const updateArticleVotes = async (articleId, voteChange, token) => {
-  const { data } = await api.patch(
-    `/${articleId}`,
-    { inc_votes: voteChange },
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  return data;
+  try {
+    const { data } = await api.patch(
+      `/${articleId}`,
+      { inc_votes: voteChange },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
+  }
 };
