@@ -9,7 +9,12 @@ import {
   PageNumber,
 } from "./PaginationStyles";
 
-function Pagination({ currentPage, totalPages, onPageChange, disabled }) {
+function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+  disabled = false,
+}) {
   const [isClient, setIsClient] = useState(false);
   const [pageNumbers, setPageNumbers] = useState([]);
 
@@ -109,10 +114,6 @@ Pagination.propTypes = {
   totalPages: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
-};
-
-Pagination.defaultProps = {
-  disabled: false,
 };
 
 export default Pagination;

@@ -1,3 +1,1 @@
-import AuthButtons from "./AuthButtons";
-
-export { AuthButtons };
+export { default } from "./AuthButtons";

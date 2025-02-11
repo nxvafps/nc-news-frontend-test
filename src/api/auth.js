@@ -16,6 +16,22 @@ export const registerUser = async (userData) => {
   return makeAuthRequest("/signup", userData);
 };
 
+export const fetchUserProfile = async (token) => {
+  try {
+    const response = await api.get("/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        `HTTP error! status: ${error.response?.status}`
+    );
+  }
+};
+
 const makeAuthRequest = async (endpoint, data) => {
   try {
     const response = await api.post(endpoint, data);

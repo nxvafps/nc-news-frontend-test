@@ -1,84 +1,119 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  Route,
+  createRoutesFromElements,
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+} from "react-router-dom";
 import {
   Auth,
   ArticlesList,
   ArticlePage,
-  AuthButtons,
-  LogoutButton,
+  UserProfilePage,
+  Home,
+  Navbar,
+  LoginPage,
+  SignupPage,
 } from "./components";
-import { logout } from "./store/authSlice";
-import {
-  AppContainer,
-  HeaderContainer,
-  Title,
-  Content,
-  AuthWrapper,
-} from "./AppStyles";
+import { AppContainer, HeaderContainer, Title, Content } from "./AppStyles";
 import "./App.css";
 
+function Layout({
+  showAuthForm,
+  isLogin,
+  onClose,
+  handleAuthSuccess,
+  handleLoginClick,
+  handleSignupClick,
+}) {
+  return (
+    <AppContainer role="application">
+      <a href="#main-content" className="sr-only focus-visible">
+        Skip to main content
+      </a>
+
+      <HeaderContainer>
+        <Title>NC News</Title>
+      </HeaderContainer>
+
+      <Navbar
+        onLoginClick={handleLoginClick}
+        onSignupClick={handleSignupClick}
+      />
+
+      {showAuthForm && (
+        <Auth
+          onAuthSuccess={handleAuthSuccess}
+          isLogin={isLogin}
+          onClose={onClose}
+        />
+      )}
+
+      <Content
+        id="main-content"
+        role="main"
+        tabIndex="-1"
+        style={{ outline: "none" }}
+      >
+        <Outlet />
+      </Content>
+    </AppContainer>
+  );
+}
+
 function App() {
-  const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const auth = useSelector((state) => state.auth);
 
   const handleAuthSuccess = () => {
     setShowAuthForm(false);
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLoginClick = () => {
+    setIsLogin(true);
+    setShowAuthForm(true);
   };
 
-  return (
-    <Router>
-      <AppContainer role="application">
-        <a href="#main-content" className="sr-only focus-visible">
-          Skip to main content
-        </a>
+  const handleSignupClick = () => {
+    setIsLogin(false);
+    setShowAuthForm(true);
+  };
 
-        <HeaderContainer>
-          <Title>Welcome to NC News!</Title>
-          <AuthWrapper>
-            {isAuthenticated ? (
-              <LogoutButton onLogout={handleLogout} />
-            ) : showAuthForm ? (
-              <Auth
-                onAuthSuccess={handleAuthSuccess}
-                isLogin={isLogin}
-                onClose={() => setShowAuthForm(false)}
-              />
-            ) : (
-              <AuthButtons
-                onLoginClick={() => {
-                  setIsLogin(true);
-                  setShowAuthForm(true);
-                }}
-                onSignupClick={() => {
-                  setIsLogin(false);
-                  setShowAuthForm(true);
-                }}
-              />
-            )}
-          </AuthWrapper>
-        </HeaderContainer>
-
-        <Content
-          id="main-content"
-          role="main"
-          tabIndex="-1"
-          style={{ outline: "none" }}
-        >
-          <Routes>
-            <Route path="/" element={<ArticlesList />} />
-            <Route path="/articles/:articleId" element={<ArticlePage />} />
-          </Routes>
-        </Content>
-      </AppContainer>
-    </Router>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        element={
+          <Layout
+            showAuthForm={showAuthForm}
+            isLogin={isLogin}
+            onClose={() => setShowAuthForm(false)}
+            handleAuthSuccess={handleAuthSuccess}
+            handleLoginClick={handleLoginClick}
+            handleSignupClick={handleSignupClick}
+          />
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="articles" element={<ArticlesList />} />
+        <Route path="articles/:articleId" element={<ArticlePage />} />
+        <Route path="profile" element={<UserProfilePage />} />
+        <Route path="topics" element={<div>Topics page coming soon!</div>} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="signup" element={<SignupPage />} />
+      </Route>
+    ),
+    {
+      future: {
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      },
+    }
   );
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

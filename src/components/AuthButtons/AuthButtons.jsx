@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
-
+import { useNavigate } from "react-router-dom";
 import {
   ButtonContainer,
   LoginButton,
   SignupButton,
 } from "./AuthButtonsStyles";
 
-function AuthButtons({ onLoginClick, onSignupClick }) {
+function AuthButtons() {
+  const navigate = useNavigate();
+
   return (
     <ButtonContainer role="group" aria-label="Authentication options">
       <LoginButton
-        onClick={onLoginClick}
+        onClick={() => navigate("/login")}
         aria-label="Log in to your account"
         type="button"
       >
@@ -18,7 +20,7 @@ function AuthButtons({ onLoginClick, onSignupClick }) {
         <span className="sr-only">Log in to your account</span>
       </LoginButton>
       <SignupButton
-        onClick={onSignupClick}
+        onClick={() => navigate("/signup")}
         aria-label="Create a new account"
         type="button"
       >
@@ -28,10 +30,5 @@ function AuthButtons({ onLoginClick, onSignupClick }) {
     </ButtonContainer>
   );
 }
-
-AuthButtons.propTypes = {
-  onLoginClick: PropTypes.func.isRequired,
-  onSignupClick: PropTypes.func.isRequired,
-};
 
 export default AuthButtons;

@@ -1,25 +1,18 @@
-import { Article } from "./Article";
-import { ArticleContent } from "./ArticleContent";
-import { ArticleFilters } from "./ArticleFilters";
-import { ArticlesList } from "./ArticlesList";
-import { ArticlePage } from "./ArticlePage";
-import { Auth } from "./Auth";
-import { AuthButtons } from "./AuthButtons";
-import { Comment } from "./Comment";
-import { CommentsList } from "./CommentsList";
-import { LogoutButton } from "./LogoutButton";
-import { Pagination } from "./Pagination";
+export { default as Auth } from "./Auth";
+export { default as ArticlesList } from "./ArticlesList";
+export { default as ArticlePage } from "./ArticlePage";
+export { default as AuthButtons } from "./AuthButtons";
+export { default as ProfileButton } from "./ProfileButton";
+export { default as UserProfilePage } from "./UserProfile";
+export { default as Home } from "./Home";
+export { default as Navbar } from "./Navbar";
+export { LoginPage, SignupPage } from "./Auth";
 
-export {
-  Article,
-  ArticleContent,
-  ArticleFilters,
-  ArticlesList,
-  ArticlePage,
-  Auth,
-  AuthButtons,
-  Comment,
-  CommentsList,
-  LogoutButton,
-  Pagination,
-};
+// Re-export named exports
+export { Article } from "./Article";
+export { ArticleFilters } from "./ArticleFilters";
+export { Pagination } from "./Pagination";
+export { ArticleContent } from "./ArticleContent";
+export { CommentsList } from "./CommentsList";
+export { LogoutButton } from "./LogoutButton";
+export { Comment } from "./Comment";
